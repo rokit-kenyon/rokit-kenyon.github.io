@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Platformer Game with Number Generation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        canvas {
+            background: #87CEEB; /* Sky blue */
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Player properties
+        const player = {
+            x: 50,
+            y: 300,
+            width: 30,
+            height: 30,
+            dy: 0,
+            dx: 0, // Added horizontal velocity
+            gravity: 0.5,
+            jumpPower: -10, 
+            speed: 5, // Added speed
+            isJumping: false
+        };
+
+        // Number properties
+        let number = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+        let numberX = Math.random() * (canvas.width - 50) + 25; // Random x position
+        let numberY = Math.random() * (canvas.height - 50) + 25; // Random y position
+
+        // Game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawNumber();
+            updatePlayer();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Draw player
+        function drawPlayer() {
+            ctx.fillStyle = "red";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        // Draw number
+        function drawNumber() {
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Number: " + number, numberX, numberY);
+        }
+
+        // Update player position
+        function updatePlayer() {
+            // Horizontal movement
+            player.x += player.dx;
+
+            // Keep player within bounds
+            if (player.x < 0) {
+                player.x = 0;
+            } else if (player.x + player.width > canvas.width) {
+                player.x = canvas.width - player.width;
+            }
+
+            // Vertical movement (gravity and jumping)
+            player.y += player.dy;
+            player.dy += player.gravity;
+
+            // Ground collision
+            if (player.y + player.height >= canvas.height) {
+                player.y = canvas.height - player.height;
+                player.dy = 0;
+                player.isJumping = false;
+            }
+
+            // Check for number collection
+            if (player.x < numberX + 25 && player.x + player.width > numberX - 25 &&
+                player.y < numberY + 25 && player.y + player.height > numberY - 25) {
+                alert("You collected the number: " + number);
+                number = Math.floor(Math.random() * 100) + 1; // Generate a new number
+                numberX = Math.random() * (canvas.width - 50) + 25; // New random x position
+                numberY = Math.random() * (canvas.height - 50) + 25; // New random y position
+            }
+        }
+
+        // Jump function
+        function jump() {
+            if (!player.isJumping) {
+                player.dy = player.jumpPower;
+                player.isJumping = true;
+            }
+        }
+
+        // Key event listeners
+        window.addEventListener("keydown", function(event) {
+            switch (event.code) {
+                case "KeyW": // W key for jump
+                    jump();
+                    break;
+                case "KeyA": // A key for left
+                    player.dx = -player.speed; // Move left
+                    break;
+                case "KeyD": // D key for right
+                    player.dx = player.speed; // Move right
+                    break;
+            }
+        });
+
+        window.addEventListener("keyup", function(event) {
+            if (event.code === "KeyA" || event.code === "KeyD") {
+                player.dx = 0; // Stop horizontal movement when key is released
+            }
+        });
+
+        // Start the game loop
+        gameLoop();
+    </script>
+</body>
+</html>
