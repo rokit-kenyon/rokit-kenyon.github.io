@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        java script page
+        </title>
+    </head>
+    <body>
+        <script>
+            let choice = prompt("Enter your choice: rock, paper, or scissors");
+            if (choice === "rock") {
+                alert("You chose rock! but your opponent chose paper, you lose! maybe try black hole next?");
+            } else if (choice === "paper") {
+                alert("You chose paper!but your opponent chose scissors, you lose!maybe try black hole next?");
+            } else if (choice === "scissors") {
+                alert("You chose scissors!but your opponent chose rock, you lose!maybe try black hole next?");
+            } else if (choice === "black hole") {
+                alert("you chose blackhole meaning you win! but in the end we all go to the black hole");
+                choice = prompt("as you getn sucked in you suddenly find on the ground in a forest, do you go left, right, straight,or backward?");
+            } else {
+                alert("you chose "+choice+" you win! maybe try black hole next?");
+                choice = prompt("rock, paper, or scissors?");
+            }
+
+            if (choice === "left") {
+                alert("you start walking and find a river, do you swim across or walk along the bank?");
+                choice = prompt("swim or walk?");}
+                else if (choice === "right") {
+                alert("you start walking and find a mountain, do you go around or climb it?");
+                choice = prompt("go around or climb?");}
+                else if (choice === "straight") {
+                alert("you start walking and find a flaming forest, do you go through or around it?");
+                choice = prompt("through or around?");}
+                else if (choice === "backward") {
+                alert("you start walking and find a giant hole, do you go in or around it?");
+                choice = prompt("in or around?");}
+                else {
+                alert("you are overwelmed by the choice and die of a hart atack");
+                choice = prompt("left, right, straight, or backward?");}
+
+            if (choice === "swim") {
+                alert("you swim across and find a village, you win!");}
+            else if (choice === "walk") {
+                alert("you walk along the bank and get eaten by a crocodile, you lose!");}
+            else if (choice === "go around") {
+                alert("you go around and find a village, you win!");}
+            else if (choice === "climb") {
+                alert("you climb the mountain and fall to your death, you lose!");}
+            else if (choice === "through") {
+                alert("you go through and get burned to death, you lose!");}
+            else if (choice === "around") {
+                alert("you go around and find a village, you win!");}
+            else if (choice === "in") {
+                alert("you go in and find a treasure chest, you win!");}
+            else if (choice === "around") {
+                alert("you go around and fall into a pit, you lose!");}
+            else {
+                alert("you are overwelmed by the choice and die of a hart atack");}
+        </script>
+    </body>
+</html>
