@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        java loop page
+        </title>
+    </head>
+    <body>
+        <script>
+            let stars = 1;
+            let spaces = 400;
+            let out = "";
+            while (stars <= 1) {
+                out += "🟦".repeat(spaces);
+                out += "⭐".repeat(stars);
+                out += "\n";
+                spaces -= 1;
+                stars += 2;
+                    while (stars <= 400) {
+                    out += "🟩".repeat(spaces);
+                    out += "🟥".repeat(stars);
+                    out += "\n";
+                    spaces -= 1;
+                    stars += 2
+                        while (stars >=400 && stars <= 800) {
+                            out += "🟪".repeat(spaces);
+                            out += "🟧".repeat(stars);
+                            out += "\n";
+                            spaces -= 1;
+                            stars += 2;
+                        }}}
+            console.log(out);
+
+        </script>   
+    </body>
+</html>.=
