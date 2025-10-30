@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        spooky page
+        </title>
+    </head>
+    <body>
+        <div id="knife">🗡️</div>
+        <div id= "pumpkin">🟠</div>  
+        <div id="jack-o-lanturn">🎃</div>    
+        <div id="heart">💖</div>
+        <div id="heartwitharrow">💘</div> 
+        <div id="arrow">&lt;---</div>  
+        <style>
+            * {
+                inset: 0;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overflow: hidden;  
+                background-color: black;              
+            }
+        #knife{
+            font-size: 200px;
+            position: absolute;
+            top : 400dvh;
+            left: 400dvw;
+            width : fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: moveKnife 4s linear ;
+        }
+        @keyframes moveKnife {
+            0% {
+                top: 400dvh;
+                left: 400dvw;
+            }
+            10% {
+                top: -5dvh;
+                left: -5dvw;
+            }
+            20% {
+                top: 400dvh;
+                left: 400dvw;
+            }
+            30% {
+                top: -5dvh;
+                left: -5dvw;
+            }
+            40% {
+                top: 400dvh;
+                left: 400dvw;
+            }
+            50% {
+                top: -5dvh;
+                left: -5dvw;
+            }
+            60% {
+                top: 400dvh;
+                left: 400dvw;
+            }
+            70% {
+                top: -5dvh;
+                left: -5dvw;
+            }
+            80% {
+                top: 400dvh;
+                left: 400dvw;
+            }
+            90% {
+                top: -5dvh;
+                left: -5dvw;
+            }
+            100% {
+                top: 400dvh;
+                left: 400dvw;
+            }}
+    
+        #pumpkin{
+            font-size: 200px;
+            position: absolute;
+            top : 50dvh;
+            left: 50dvw;
+            width : fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: pumpkin 6s linear forwards;
+        }
+        @keyframes pumpkin {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        #jack-o-lanturn{
+            font-size: 200px;
+            position: absolute;
+            top: 50dvh;
+            left: 50dvw;
+            width: fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: jack-o-lantern 6s linear forwards;
+        }
+        @keyframes jack-o-lantern {
+            0% {opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+            
+
+        
+        }
+        #heart{
+            font-size: 250px;
+            position: absolute;
+            top: 90dvh;
+            left: 5dvw;
+            width: fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: heart 6s steps(1) forwards;
+        }
+        @keyframes heart {
+            0% {opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }        
+        }
+        #heartwitharrow{
+            font-size: 250px;
+            position: absolute;
+            top: 90dvh;
+            left: 5dvw;
+            width: fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: heartwitharrow 6s steps(1) forwards;
+        }
+        @keyframes heartwitharrow {
+            0% {opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }        
+        }
+        #arrow{
+            font-size: 250px;
+            text-wrap: nowrap;
+            color: white;
+            position: absolute;
+            top: 90dvh;
+            left: 110dvw;
+            width: fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            animation: arrow 6s linear ;
+        }
+        @keyframes arrow {
+            0% {top: 90dvh;
+                left: 110dvw;
+            }
+            100% {
+                top: 90dvh;
+                left: 10dvw;
+            }        
+        }
+        </style>
+
+
+    </body>
+</html>
