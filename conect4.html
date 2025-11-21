@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+    <style>
+      * {
+        inset: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width : 100dvw;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .board {
+        display: grid;
+        width : fit-content;
+        height: fit-content;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        border: black 2px solid;
+        box-shadow: black 8px 8px;
+      }
+
+      .board>a {
+        width : 100px;
+        height: 100px;
+        border: black 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 70px;
+        font-family: sans-serif;
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .x {
+        color: blue;
+        cursor: default;
+        font-weight: bold;
+      }
+
+      .o {
+        color: red;
+        cursor: default;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-family: sans-serif;
+        font-size: 32px;
+      }
+
+      #info {
+        font-family: sans-serif;
+        font-size: 18px;
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      button {
+        background: white;
+        border: 2px solid black;
+        color: black;
+        border-radius: 1rem;
+        padding-left: 8px;
+        padding-right: 8px;
+        font-size: 18px;
+        font-family: sans-serif;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: black;
+        color: white;
+      }
+    </style>
+
+    <div class="container">
+      <h1>Tic-Tac-Toe</h1>
+      <div class="board">
+        <a id="a1"></a>
+        <a id="a2"></a>
+        <a id="a3"></a>
+        <a id="a4"></a>
+        <a id="a5"></a>
+        <a id="a6"></a>
+        <a id="a7"></a>
+        <a id="b1"></a>
+        <a id="b2"></a>
+        <a id="b3"></a>
+        <a id="b4"></a>
+        <a id="b5"></a>
+        <a id="b6"></a>
+        <a id="b7"></a>
+        <a id="c1"></a>
+        <a id="c2"></a>
+        <a id="c3"></a>
+        <a id="c4"></a>
+        <a id="c5"></a>
+        <a id="c6"></a>
+        <a id="c7"></a>
+        <a id="d1"></a>
+        <a id="d2"></a>
+        <a id="d3"></a>
+        <a id="d4"></a>
+        <a id="d5"></a>
+        <a id="d6"></a>
+        <a id="d7"></a>
+        <a id="e1"></a>
+        <a id="e2"></a>
+        <a id="e3"></a>
+        <a id="e4"></a>
+        <a id="e5"></a>
+        <a id="e6"></a>
+        <a id="e7"></a>
+        <a id="f1"></a>
+        <a id="f2"></a>
+        <a id="f3"></a>
+        <a id="f4"></a>
+        <a id="f5"></a>
+        <a id="f6"></a>
+        <a id="f7"></a>
+      </div>
+      <span id="info"><span class="x">Player 1</span>, click on an empty cell to place an <span class="x">X</span></span>
+    </div>
+
+    <script>
+      const info = document.getElementById("info")
+
+      const a1 = document.getElementById("a1")
+      const a2 = document.getElementById("a2")
+      const a3 = document.getElementById("a3")
+      const a4 = document.getElementById("a4")
+      const a5 = document.getElementById("a5")
+      const a6 = document.getElementById("a6")
+      const a7 = document.getElementById("a7")
+
+      const b1 = document.getElementById("b1")
+      const b2 = document.getElementById("b2")
+      const b3 = document.getElementById("b3")
+      const b4 = document.getElementById("b4")
+      const b5 = document.getElementById("b5")
+      const b6 = document.getElementById("b6")
+      const b7 = document.getElementById("b7")
+
+      const c1 = document.getElementById("c1")
+      const c2 = document.getElementById("c2")
+      const c3 = document.getElementById("c3")
+      const c4 = document.getElementById("c4")
+      const c5 = document.getElementById("c5")
+      const c6 = document.getElementById("c6")
+      const c7 = document.getElementById("c7")
+      
+      const d1 = document.getElementById("d1")
+      const d2 = document.getElementById("d2")
+      const d3 = document.getElementById("d3")
+      const d4 = document.getElementById("d4")
+      const d5 = document.getElementById("d5")
+      const d6 = document.getElementById("d6")
+      const d7 = document.getElementById("d7")
+
+      const e1 = document.getElementById("e1")
+      const e2 = document.getElementById("e2")
+      const e3 = document.getElementById("e3")
+      const e4 = document.getElementById("e4")
+      const e5 = document.getElementById("e5")
+      const e6 = document.getElementById("e6")    
+      const e7 = document.getElementById("e7")  
+      
+      const f1 = document.getElementById("f1")
+      const f2 = document.getElementById("f2")
+      const f3 = document.getElementById("f3")  
+      const f4 = document.getElementById("f4")
+      const f5 = document.getElementById("f5")  
+      const f6 = document.getElementById("f6")
+      const f7 = document.getElementById("f7")
+      
+
+      let turn = 0
+
+      function onClick(e) {
+        if (turn < 0 || e.target.classList.length > 0)
+          return;
+
+        // turn is odd
+        if (turn & 1) {
+          e.target.innerHTML = "O"
+          e.target.classList.remove("x")
+          e.target.classList.add   ("o")
+          info.innerHTML = "<span class='x'>Player 1</span> click on an empty cell to place an <span class='x'>X</span>"
+        } else {
+          e.target.innerHTML = "X"
+          e.target.classList.remove("o")
+          e.target.classList.add   ("x")
+          info.innerHTML = "<span class='o'>Player 2</span> click on an empty cell to place an <span class='o'>O</span>"
+        }
+
+        turn += 1
+
+        // check rows
+        check(a1, a2, a3,a4)
+        check(a2, a3, a4,a5)
+        check(a3, a4, a5,a6)
+        check(a4, a5, a6,a7)
+
+        check(b1, b2, b3,b4)
+        check(b2, b3, b4,b5)
+        check(b3, b4, b5,b6)    
+        check(b4, b5, b6,b7)
+
+        check(c1, c2, c3,c4)
+        check(c2, c3, c4,c5)
+        check(c3, c4, c5,c6)
+        check(c4, c5, c6,c7)
+
+        check(d1, d2, d3,d4)
+        check(d2, d3, d4,d5)
+        check(d3, d4, d5,d6)
+        check(d4, d5, d6,d7)
+
+        check(e1, e2, e3,e4)
+        check(e2, e3, e4,e5)
+        check(e3, e4, e5,e6)
+        check(e4, e5, e6,e7)
+
+        check(f1, f2, f3,f4)
+        check(f2, f3, f4,f5)
+        check(f3, f4, f5,f6)
+        check(f4, f5, f6,f7)
+
+
+        // check columns
+        check(a1, b1, c1, d1)
+        check(a2, b2, c2, d2)
+        check(a3, b3, c3, d3)
+        check(a4, b4, c4, d4)
+        check(a5, b5, c5, d5)
+        check(a6, b6, c6, d6)
+        check(a7, b7, c7, d7)
+        check(b1, c1, d1, e1)
+        check(b2, c2, d2, e2)
+        check(b3, c3, d3, e3)
+        check(b4, c4, d4, e4)
+        check(b5, c5, d5, e5)
+        check(b6, c6, d6, e6)
+        check(b7, c7, d7, e7)
+        check(c1, d1, e1, f1)
+        check(c2, d2, e2, f2)
+        check(c3, d3, e3, f3)
+        check(c4, d4, e4, f4)   
+        check(c5, d5, e5, f5)
+        check(c6, d6, e6, f6)
+
+        // check diagnols
+        check(a1, b2, c3, d4)
+        check(a2, b3, c4, d5)
+        check(a3, b4, c5, d6)
+        check(a4, b5, c6, d7)
+        check(b1, c2, d3, e4)
+        check(b2, c3, d4, e5)
+        check(b3, c4, d5, e6)
+        check(b4, c5, d6, e7)
+        check(c1, d2, e3, f4)
+        check(c2, d3, e4, f5)
+        check(c3, d4, e5, f6)
+        check(d1, c2, b3, a4)
+        check(d2, c3, b4, a5)
+        check(d3, c4, b5, a6)
+        check(d4, c5, b6, a7)
+        check(e1, d2, c3, b4)
+        check(e2, d3, c4, b5)
+        check(e3, d4, c5, b6)
+        check(e4, d5, c6, b7)
+        check(f1, e2, d3, c4)
+        check(f2, e3, d4, c5)
+        check(f3, e4, d5, c6)
+
+        
+
+
+        
+
+        if (turn > 41) {
+          info.innerHTML = "Cat's Game, No One Wins. <button onclick='resetAll()'>Play Again</button>"
+          a1.innerHTML = "😺"
+          a2.innerHTML = "😸"
+          a3.innerHTML = "😹"
+          b1.innerHTML = "😻"
+          b2.innerHTML = "😼"
+          b3.innerHTML = "😽"
+          c1.innerHTML = "🙀"
+          c2.innerHTML = "😿"
+          c3.innerHTML = "😾"
+          turn = -1
+        }
+      }
+
+      function check(a, b, c, d) {
+        if (
+          a.innerText !== "" &&
+          a.innerText === b.innerText &&
+          b.innerText === c.innerText &&
+          c.innerText === d.innerText 
+        ) {
+          if (turn & 1) {
+            info.innerHTML = "<span class='x'>Player 1</span> Wins! <button onclick='resetAll()'>Play Again</button>"
+            a.innerHTML = "🤞"
+            b.innerHTML = "🤞"
+            c.innerHTML = "🤞"
+            d.innerHTML = "🤞"
+          } else {
+            info.innerHTML = "<span class='o'>Player 2</span> Wins! <button onclick='resetAll()'>Play Again</button>"
+            a.innerHTML = "👌"
+            b.innerHTML = "👌"
+            c.innerHTML = "👌"
+            d.innerHTML = "👌"
+          }
+          turn = -1
+        }
+      }
+
+      function reset(a) {
+        a.classList.remove("x")
+        a.classList.remove("o")
+        a.innerHTML = ""
+      }
+
+      function resetAll() {
+        info.innerHTML = "<span class='x'>Player 1</span> click on an empty cell to place an <span class='x'>X</span>"
+        reset(a1); reset(a2); reset(a3); reset(a4); reset(a5); reset(a6); reset(a7);
+        reset(b1); reset(b2); reset(b3); reset(b4); reset(b5); reset(b6); reset(b7);
+        reset(c1); reset(c2); reset(c3); reset(c4); reset(c5); reset(c6); reset(c7);
+        reset(d1); reset(d2); reset(d3); reset(d4); reset(d5); reset(d6); reset(d7);
+        reset(e1); reset(e2); reset(e3); reset(e4); reset(e5); reset(e6); reset(e7);
+        reset(f1); reset(f2); reset(f3); reset(f4); reset(f5); reset(f6); reset(f7);
+        turn = 0;
+      }
+
+      a1.onclick = onClick
+      a2.onclick = onClick
+      a3.onclick = onClick
+      a4.onclick = onClick
+      a5.onclick = onClick
+      a6.onclick = onClick
+      a7.onclick = onClick
+      b1.onclick = onClick
+      b2.onclick = onClick
+      b3.onclick = onClick
+      b4.onclick = onClick
+      b5.onclick = onClick
+      b6.onclick = onClick
+      b7.onclick = onClick
+      c1.onclick = onClick
+      c2.onclick = onClick
+      c3.onclick = onClick
+      c4.onclick = onClick
+      c5.onclick = onClick
+      c6.onclick = onClick
+      c7.onclick = onClick
+      d1.onclick = onClick
+      d2.onclick = onClick
+      d3.onclick = onClick
+      d4.onclick = onClick
+      d5.onclick = onClick
+      d6.onclick = onClick
+      d7.onclick = onClick
+      e1.onclick = onClick
+      e2.onclick = onClick
+      e3.onclick = onClick
+      e4.onclick = onClick
+      e5.onclick = onClick
+      e6.onclick = onClick
+      e7.onclick = onClick
+      f1.onclick = onClick
+      f2.onclick = onClick
+      f3.onclick = onClick
+      f4.onclick = onClick
+      f5.onclick = onClick
+      f6.onclick = onClick
+      f7.onclick = onClick
+
+
+    </script>
+
+  </body>
+</html>
