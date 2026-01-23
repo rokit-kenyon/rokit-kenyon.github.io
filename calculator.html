@@ -65,8 +65,8 @@
       <button id="lparen">(</button>
       <button id="rparen">)</button>
       <button id="divide">÷</button>
-      <button id="add">+</button>
-
+      <button id="multiply">×</button>
+     
       <button id="7">7</button>
       <button id="8">8</button>
       <button id="9">9</button>
@@ -75,7 +75,7 @@
       <button id="4">4</button>
       <button id="5">5</button>
       <button id="6">6</button>
-      <button id="multiply">×</button>
+      <button id="add">+</button>
 
       <button id="1">1</button>
       <button id="2">2</button>
@@ -85,35 +85,35 @@
       <button id="0">0</button>
       <button id="dot">.</button>
       <button id="go">=</button>
+    
 
 
     </div>
 
     <script>
       const display = document.getElementById("display")
-      
-      const _0 = document.getElementById("0")
-      const _1 = document.getElementById("1")
-      const _2 = document.getElementById("2")
-      const _3 = document.getElementById("3")
-      const _4 = document.getElementById("4")
-      const _5 = document.getElementById("5")
-      const _6 = document.getElementById("6")
-      const _7 = document.getElementById("7")
-      const _8 = document.getElementById("8")
-      const _9 = document.getElementById("9")
 
-      const add = document.getElementById("add")
-      const sub = document.getElementById("sub")
-      const multiply = document.getElementById("multiply")
-      const dot = document.getElementById("dot")
-      const go  = document.getElementById("go" )
-      const c   = document.getElementById("c"  )
-      const divide = document.getElementById("divide")
-      const lparen = document.getElementById("lparen")
-      const rparen = document.getElementById("rparen")
-
-      const buttons = [_0,_1,_2,_3,_4,_5,_6,_7,_8,_9,add,sub,multiply,dot,divide,lparen,rparen]      
+      const buttons = [
+        document.getElementById("0"),
+        document.getElementById("1"),
+        document.getElementById("2"),
+        document.getElementById("3"),
+        document.getElementById("4"),
+        document.getElementById("5"),
+        document.getElementById("6"),
+        document.getElementById("7"),
+        document.getElementById("8"),
+        document.getElementById("9"),
+        document.getElementById("add"),
+        document.getElementById("sub"),
+        document.getElementById("multiply"),
+        document.getElementById("dot"),
+        document.getElementById("divide"),
+        document.getElementById("lparen"),
+        document.getElementById("rparen"),
+      ]
+      const go  = document.getElementById("go")
+      const c   = document.getElementById("c" )  
 
       buttons.forEach( button => {
         if (!button) return;
@@ -121,7 +121,7 @@
         button.addEventListener("click", () => {
           
           if (display.innerText === "0") {
-            display.innerText = button.innerText
+            display.innerText  = button.innerText
           } else {
             display.innerText += button.innerText
           }
@@ -136,7 +136,7 @@
         let expression = display.innerText
         expression = expression.replaceAll("×", "*")
         expression = expression.replaceAll("÷", "/")
-        eval("display.innerText = " + expression)
+        display.innerText = eval(expression)
       })
 
 
