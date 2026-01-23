@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clicks</title>
+  </head>
+  <body>
+    <style>
+        .rectangle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: burlywood;
+        }
+    </style>
+    <script>
+      // body height is 0 by default
+      document.body.style.height = "1000dvh"
+
+
+      
+
+      /** @param {MouseEvent} e */
+      function onClick(event) {
+        const rectangle = document.createElement('div');
+        rectangle.classList.add ('rectangle');
+
+        rectangle.style.left = (event.clientX - 25) + "px";
+        rectangle.style.top  = (event.clientY - 25) + "px";
+
+        document.body.appendChild(rectangle);
+        
+      }
+
+      document.body.onclick =onClick
+    </script>
+  </body>
+</html>
