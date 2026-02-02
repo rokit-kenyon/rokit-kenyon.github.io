@@ -16,6 +16,7 @@
         min-height: 100dvh;
         align-items: center;
         justify-content: center;
+        background-color: rgb(50, 50, 70);
       }
 
       #calculator {
@@ -23,16 +24,21 @@
         width : min-content;
         height: fit-content;
         grid-template-columns: repeat(4, 1fr);
-        gap: .15rem;
+        gap: .25rem;
+        border: 10px solid rgb(0, 0, 15);
+        padding: 3rem;
+        border-radius: 5rem;
+        background-color: black;
       }
 
       #calculator * {
-        width : 5rem;
-        height: 5rem;
+        width : 6rem;
+        height: 6rem;
         font: 2rem monospace;
         background-color: gray;
+        border: 4px solid darkgray;
 
-        border-radius: .5rem;
+        border-radius: 3rem;
       }
 
       #calculator button:hover {
@@ -58,6 +64,8 @@
         width : 100%;
         height: 100%;
       }
+
+
     </style>
 
     <div id="calculator">
@@ -181,7 +189,6 @@
         c.addEventListener("click", () => {
             display.innerText = "";
         })
-
 
 
 
