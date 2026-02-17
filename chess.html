@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <style>
+        #chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            width: 720px;
+            height: 720px;
+            border: 2px solid #000;
+        }
+
+        .square {
+            width: 90px;
+            height: 90px;
+            font-size: 30px; 
+            text-align: center;
+            line-height: 50px; 
+        }
+
+        .white {
+            background-color: darkblue;
+        }
+
+        .black {
+            background-color: red;
+        }
+
+        .piece {
+            cursor: grab;
+        }
+
+        .dragging {
+            opacity: 0.6; 
+        }
+    </style>
+</head>
+<body>
+    <div id="chessboard"></div>
+    <script>
+        const chessboard = document.getElementById('chessboard');
+        const boardSize = 8;
+        let draggedPiece = null;
+        let initialSquare = null;
+
+        function createBoard() {
+            for (let row = 0; row < boardSize; row++) {
+                for (let col = 0; col < boardSize; col++) {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+
+                    
+                    if ((row + col) % 2 === 0) {
+                        square.classList.add('white');
+                    } else {
+                        square.classList.add('black');
+                    }
+
+                    
+                    square.addEventListener('dragover', (e) => {
+                        e.preventDefault(); 
+                    });
+
+                    
+                    square.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        const targetSquare = e.target.closest('.square');
+                        if (!targetSquare) return; 
+
+                        const piece = draggedPiece;
+                        const targetRow = parseInt(targetSquare.dataset.row);
+                        const targetCol = parseInt(targetSquare.dataset.col);
+                        const initialRow = parseInt(initialSquare.dataset.row);
+                        const initialCol = parseInt(initialSquare.dataset.col);
+
+                        if (isValidMove(piece, initialRow, initialCol, targetRow, targetCol)) {
+                            initialSquare.removeChild(piece);
+                            targetSquare.appendChild(piece);
+                        } else {
+                            initialSquare.appendChild(piece);
+                        }
+                        draggedPiece = null;
+                        initialSquare = null;
+                    });
+
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+
+        // Function to initialize pieces on the board
+        function initializePieces() {
+            const pieces = {
+                '♜': 'black', '♞': 'black', '♝': 'black', '♛': 'black', '♚': 'black', '♝': 'black', '♞': 'black', '♜': 'black',
+                '♟': 'black', '♟': 'black', '♟': 'black', '♟': 'black', '♟': 'black', '♟': 'black', '♟': 'black', '♟': 'black',
+                '♖': 'white', '♘': 'white', '♗': 'white', '♕': 'white', '♔': 'white', '♗': 'white', '♘': 'white', '♖': 'white',
+                '♙': 'white', '♙': 'white', '♙': 'white', '♙': 'white', '♙': 'white', '♙': 'white', '♙': 'white', '♙': 'white'
+            };
+
+            let pieceIndex = 0;
+
+            for (let row = 0; row < boardSize; row++) {
+                for (let col = 0; col < boardSize; col++) {
+                    const square = chessboard.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                    if (!square) continue;
+
+                    if (row === 0 || row === 1 || row === 6 || row === 7) {
+                        const pieceKey = Object.keys(pieces)[pieceIndex];
+                        const pieceColor = pieces[pieceKey];
+                        const piece = document.createElement('div');
+                        piece.classList.add('piece');
+                        piece.textContent = pieceKey;
+                        piece.style.color = pieceColor === 'white' ? 'white' : 'black';
+                        piece.draggable = true;
+                        piece.addEventListener('dragstart', (e) => {
+                            draggedPiece = e.target;
+                            initialSquare = e.target.parentNode;
+                            e.target.classList.add('dragging');
+                        });
+                        piece.addEventListener('dragend', (e) => {
+                            e.target.classList.remove('dragging');
+                        });
+                        square.appendChild(piece);
+                        pieceIndex++;
+                    }
+                }
+            }
+        }
+
+        // Function to check if a move is valid (Basic implementation - you'll need to expand this)
+        function isValidMove(piece, initialRow, initialCol, targetRow, targetCol) {
+            // Basic check: only allow moves to empty squares or to capture opponent's pieces
+            const targetSquare = chessboard.querySelector(`[data-row="${targetRow}"][data-col="${targetCol}"]`);
+            if (!targetSquare) return false;
+
+            const targetPiece = targetSquare.querySelector('.piece');
+            if (targetPiece) {
+                // Check if the target piece is of the same color
+                if (piece.style.color === targetPiece.style.color) {
+                    return false; // Cannot capture your own piece
+                }
+            }
+
+            // Add more specific move validation logic here based on the piece type
+            return true;
+        }
+
+        // Initialize the board and pieces
+        createBoard();
+        initializePieces();
+    </script>
+</body>
+</html>
