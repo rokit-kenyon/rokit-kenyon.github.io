@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        rulet
+    </title>
+    <body>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+                align-items: center;
+                text-align: center;
+            }
+            h1 {
+                color: rgb(50, 50, 100);
+            }
+            #Ruletbutton{
+                background-color: rgb(50, 100, 50);
+                color: white;
+                border: none;
+                padding: 100px 100px;
+                border-radius: 200px;
+
+                cursor: pointer;
+            }
+            #Ruletbutton:hover {
+                background: lightblue;
+            }
+            
+            .invisble {
+                display:none;
+            }
+            
+        </style>
+        <div id=play>
+            <h1>Welcome to Rulet</h1>
+            <button id="Ruletbutton">Play Rulet</button>
+        </div>
+        <div id=loss class=invisble>
+            <img scr="">
+            <button id="restartbutton"> restart the game</button>
+        </div>
+        <script>
+            const play = document.getElementById('play')
+            const loss = document.getElementById('loss')
+
+            const ruletbutton = document.getElementById('Ruletbutton');
+            const restartbutton = document.getElementById('restartbutton');
+
+            ruletbutton.addEventListener('click', onClick);
+            restartbutton.addEventListener('click', restartGame);
+
+            let losschance= 1
+            function onClick() {
+                let roll = Math.random()*100;
+                if (roll < losschance) {
+                    losschance=1
+                    play.style.display = 'none';
+                    loss.style.display = 'block';+
+                }
+                losschance += 1;
+                console.log(losschance)
+            }
+        </script>
+    </body>
+</html>
