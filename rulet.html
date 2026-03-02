@@ -9,59 +9,123 @@
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
                 margin: 0;
-                padding: 20px;
                 align-items: center;
                 text-align: center;
             }
-            h1 {
-                color: rgb(50, 50, 100);
+            #play {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                background-color: blue;
+                height: 100dvh;
+
             }
+            #content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 90dvh;
+            }
+
             #Ruletbutton{
+                color: rgb(142, 235, 222);
+                font-size: 5dvh;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 200px;
+                cursor: pointer;
+                height: 27.5dvh;
+                width: 15dvw;
+                background-image: url('roulette.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+
+            }
+
+            #Ruletbutton:hover {
+                background-color: rgb(100, 100, 255);
+                background-image: url('roulette.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+
+            }
+
+            #loss {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100dvh;
+                background-image: url('');
+            }
+
+            #restartbutton {
                 background-color: rgb(50, 100, 50);
                 color: white;
                 border: none;
-                padding: 100px 100px;
-                border-radius: 200px;
-
+                padding: 15px 30px;
+                border-radius: 360px;
                 cursor: pointer;
+                height: 27.5dvh;
+                width: 15dvw;
+                
+
             }
-            #Ruletbutton:hover {
+
+            #restartbutton:hover {
                 background: lightblue;
             }
-            
-            .invisble {
-                display:none;
+
+            #play.invisible {
+                display: none;
+            }
+
+            #loss.invisible {
+                display: none;
             }
             
         </style>
         <div id=play>
-            <h1>Welcome to Rulet</h1>
-            <button id="Ruletbutton">Play Rulet</button>
+            <h1>Rulet</h1>
+            <div id="content">
+                <button id="Ruletbutton">Play Rulet</button>
+            </div>
         </div>
-        <div id=loss class=invisble>
-            <img scr="">
+        <div id=loss class="invisible">
             <button id="restartbutton"> restart the game</button>
         </div>
         <script>
-            const play = document.getElementById('play')
-            const loss = document.getElementById('loss')
+            const play  = document.getElementById('play')
+            const loss  = document.getElementById('loss')
 
-            const ruletbutton = document.getElementById('Ruletbutton');
+            const ruletbutton   = document.getElementById('Ruletbutton');
             const restartbutton = document.getElementById('restartbutton');
 
-            ruletbutton.addEventListener('click', onClick);
-            restartbutton.addEventListener('click', restartGame);
+            ruletbutton   .addEventListener('click', onClick);
+            restartbutton .addEventListener('click', restart);
 
             let losschance= 1
             function onClick() {
+                
                 let roll = Math.random()*100;
                 if (roll < losschance) {
                     losschance=1
-                    play.style.display = 'none';
-                    loss.style.display = 'block';+
+                    play.classList.add('invisible');
+                    loss.classList.remove('invisible');
                 }
-                losschance += 1;
+
                 console.log(losschance)
+
+                losschance += 1;
+                if (losschance >= 100) {
+                    losschance = 1;
+                }
+            }
+            function restart() {
+                play.classList.remove('invisible');
+                loss.classList.add('invisible');
             }
         </script>
     </body>

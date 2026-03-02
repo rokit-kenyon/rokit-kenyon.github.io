@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        rotating img
+    </title>
+    <body>
+       <div class="background-container" id="bgContainer">
+            <!-- Your actual content goes here -->
+            <h1>Rotating Background Demo</h1>
+            <p>This content will not rotate.</p>
+            <button onclick="rotateBackground()">Rotate 45 deg</button>
+        </div>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                align-items: center;
+                text-align: center;
+            }
+            .background-container {
+                position: relative; /* Needed for absolute positioning of the pseudo-element */
+                overflow: hidden;   /* Hides the overflow caused by rotation */
+                height: 300px;
+                width: 400px;
+                border: 2px solid black;
+                padding: 20px;
+                --rotation-angle: 0deg;
+            }
+
+            .background-container::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: -1; /* Ensure the background is behind the content */
+                background-image: url('rivals.webp'); /* Replace with your image URL */
+                background-size: cover; /* or adjust as needed */
+                width: 141%; /* Ensures full coverage after rotation (sqrt(2)*100%) */
+                height: 141%;
+                transform: translate(-50%, -50%) rotate(0deg); /* Center the element and set initial rotation */
+                transition: transform 0.5s ease; /* Smooth transition for rotation */
+                transform: translate(-50%, -50%) rotate(var(--rotation-angle))
+            }
+        </style>
+        <script>
+            let currentRotation = 0;
+            function rotateBackground() {
+                // Increment the rotation angle (e.g., by 45 degrees)
+                currentRotation += 45; 
+
+                // Get the container element
+                const container = document.getElementById("bgContainer");
+
+                // Set the new value for the CSS variable
+                container.style.setProperty('--rotation-angle', currentRotation + 'deg');
+
+                
+                
+            }
+
+        </script>
+    </body>
+</html>
